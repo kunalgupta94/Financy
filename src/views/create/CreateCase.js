@@ -36,18 +36,18 @@ const CreateCase = ({ setExisiting }) => {
 
     const optionClickHandler = (data) => {
         setCustomerData(data);
+        document.getElementById('customerData').style.display = 'block';
         name.current.value = data.name;
         address.current.value = data.address;
         documentSubmitted.current.checked = data.documentSubmitted;
         phoneNumber.current.value = data.phoneNumber;
     };
-
-    console.log(customerData);
+    
     return (
         <div>
             <Autocomplete query={query} onClick={optionClickHandler} data={customerData} />
             {customerData ? (
-                <div>
+                <div className={classes.customerData} id="customerData">
                     <div className={classes.customerDetails}>
                   Name:
                         <input className={commonClasses.textInput} type="text" disabled ref={name} />
@@ -66,18 +66,22 @@ const CreateCase = ({ setExisiting }) => {
                     </div>
                     {customerData.cases ? (
                         <table>
-                            <tr>
-                                <th>Id</th>
-                                <th>Amount1</th>
-                                <th>Created</th>
-                            </tr>
-                            {customerData.cases.map((caseData) => (
+                            <thead>
                                 <tr>
-                                    <td>{caseData.id}</td>
-                                    <td>{caseData.amount}</td>
-                                    <td>{caseData.createdOn}</td>
+                                    <th>Id</th>
+                                    <th>Amount1</th>
+                                    <th>Created</th>
                                 </tr>
-                            ))}
+                            </thead>
+                            <tbody>
+                                {customerData.cases.map((caseData) => (
+                                    <tr key={caseData.id}>
+                                        <td>{caseData.id}</td>
+                                        <td>{caseData.amount}</td>
+                                        <td>{caseData.createdOn}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
                         </table>
                     ) : null }
                 </div>

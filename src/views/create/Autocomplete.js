@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/react-hooks';
 import { createUseStyles } from 'react-jss';
-import commonStyle from '../../commonStyle';
 
 const useStyles = createUseStyles({
     searchInput: {

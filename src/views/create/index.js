@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CreateCase from "./CreateCase";
 import CreateCustomer from "./CreateCustomer";
 import useStyles from "./styles";

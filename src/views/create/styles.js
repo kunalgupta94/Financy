@@ -29,7 +29,10 @@ const useStyles = createUseStyles({
     display: "block"
   },
   customerDetails: {
-    
+
+  },
+  customerData:{
+    display: 'none',
   }
 });
 
