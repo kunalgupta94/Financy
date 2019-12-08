@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { createUseStyles } from "react-jss";
+import Layout from "./page/Layout";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import CustomerSidebar from "./views/customer/CustomerSidebar";
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from "@apollo/react-hooks";
+import Create from './views/create/index';
 
-function App() {
+const client = new ApolloClient({
+  uri: 'http://localhost:8000/graphql/',
+});
+
+const useStyles = createUseStyles({
+  app: {
+    height: "100%"
+  }
+});
+
+const App = () => {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+    <Router>
+      <div className={classes.app}>
+        <Switch>
+          <Route exact path="/" render={() => <Layout />} />
+          <Route path="/customer" render={() => <Layout sideBar={<CustomerSidebar />} />} />
+          <Route path="/create" render={() => <Layout main={<Create />} />} />
+        </Switch>
+      </div>
+    </Router>
+    </ApolloProvider>
   );
-}
+};
 
 export default App;
