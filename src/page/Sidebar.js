@@ -1,12 +1,18 @@
-import React from 'react'
-import useStyles from './styles'
-const Sidebar = ({children}) => {
+import React from 'react';
+import PropType from 'prop-types';
+import useStyles from './styles';
+
+const Sidebar = ({ children }) => {
     const classes = useStyles();
     return (
         <div className={classes.sidebar}>
             {children}
         </div>
-    )
-}
+    );
+};
 
-export default Sidebar
+Sidebar.propTypes = {
+    children: PropType.objectOf(PropType.any).isRequired,
+};
+
+export default Sidebar;
